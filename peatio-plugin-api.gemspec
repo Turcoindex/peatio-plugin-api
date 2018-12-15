@@ -3,13 +3,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "peatio/plugin/api/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "peatio-plugin-api"
+  spec.name          = "peatio-custom-api"
   spec.version       = Peatio::Plugin::Api::VERSION
   spec.authors       = ["Bohdan Suprun"]
   spec.email         = ["bsuprun@heliostech.fr"]
 
-  spec.summary       = %q{Simple example of Peatio plugin.}
-  spec.description   = %q{Peatio plugin example which adds new API endpoint for which returns English alphabet.}
+  spec.summary       = %q{Peatio plugin.}
+  spec.description   = %q{A Peatio plugin exposing custom API endpoints}
   spec.homepage      = "https://www.peatio.tech"
   spec.license       = "MIT"
 

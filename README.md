@@ -1,1 +1,1 @@
-# Peatio plugin
+# Peatio Custom API plugin
