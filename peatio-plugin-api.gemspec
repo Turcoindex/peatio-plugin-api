@@ -3,7 +3,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "peatio/plugin/api/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "peatio-custom-api"
+  spec.name          = "peatio-plugin-api"
   spec.version       = Peatio::Plugin::Api::VERSION
   spec.authors       = ["Bohdan Suprun"]
   spec.email         = ["bsuprun@heliostech.fr"]
