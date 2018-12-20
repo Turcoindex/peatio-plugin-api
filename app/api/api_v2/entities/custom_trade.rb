@@ -9,9 +9,7 @@ module APIv2
       expose :volume
       expose :funds
       expose :ask_member_id, as: :ask_member
-      expose :ask_member_email
       expose :bid_member_id, as: :bid_member
-      expose :bid_member_email
       expose :market_id, as: :market
       expose :created_at, format_with: :iso8601
 
