@@ -13,7 +13,7 @@ module APIv2
       present trades, with: APIv2::Entities::CustomTrade
     end
 
-    desc 'Returns trages with ask and bid member by grouping'
+    desc 'Returns trages with ask and bid member by grouping test'
     get "/trades-with-grouping" do
 
 #       SELECT ask_member.id, ask_member.email,trade.market_id, SUM(trade.funds) FROM peatio_production.trades AS trade
