@@ -15,6 +15,10 @@ module APIv2
     end
 
     desc 'Returns trages with ask member by grouping'
+    params do
+      requires :startdate, type: String
+      requires :enddate, type: String
+    end
     get "/trades-with-grouping-ask" do
 
       #       SELECT ask_member.id, ask_member.email,trade.market_id, SUM(trade.funds) FROM peatio_production.trades AS trade
@@ -22,7 +26,7 @@ module APIv2
       # GROUP BY ask_member.id,trade.market_id;
       ask_sql = "SELECT ask_member.id, ask_member.email, SUM(trade.funds) as volume FROM trades AS trade "
       ask_sql += "LEFT OUTER JOIN members as ask_member on trade.ask_member_id = ask_member.id "
-      # sql += "WHERE trade.created_at >= '" + params[:startdate] + "' and trade.created_at < '" + params[:enddate] + "' "
+      ask_sql += "WHERE trade.created_at >= '" + params[:startdate] + "' and trade.created_at < '" + params[:enddate] + "' "
       ask_sql += "GROUP BY ask_member.id"
 
       trades = ActiveRecord::Base.connection.exec_query(ask_sql)
