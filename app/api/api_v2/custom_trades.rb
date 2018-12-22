@@ -49,5 +49,29 @@ module APIv2
       bid_trades = ActiveRecord::Base.connection.exec_query(bid_sql)
     end
 
+    desc 'Returns trades with by-email as grouping'
+    params do
+      requires :startdate, type: String
+      requires :enddate, type: String
+      requires :email, type: String
+    end
+    get "/get-by-email" do
+      bid_sql = "SELECT bid_member.id, bid_member.email, SUM(trade.funds) as volume FROM trades AS trade "
+      bid_sql += "LEFT OUTER JOIN members as bid_member on trade.bid_member_id = bid_member.id "
+      bid_sql += "WHERE trade.created_at >= '" + params[:startdate] + "' and trade.created_at < '" + params[:enddate] + "' and bid_member.email='" + params[:email] + "' "
+      bid_sql += "GROUP BY bid_member.id"
+
+      bid_trades = ActiveRecord::Base.connection.exec_query(bid_sql)
+
+      ask_sql = "SELECT ask_member.id, ask_member.email, SUM(trade.funds) as volume FROM trades AS trade "
+      ask_sql += "LEFT OUTER JOIN members as ask_member on trade.ask_member_id = ask_member.id "
+      ask_sql += "WHERE trade.created_at >= '" + params[:startdate] + "' and trade.created_at < '" + params[:enddate] + "' and ask_member.email='" + params[:email] + "' "
+      ask_sql += "GROUP BY ask_member.id"
+
+      ask_trades = ActiveRecord::Base.connection.exec_query(ask_sql)
+
+      current_array = ask_trades.to_a + bid_trades.to_a
+    end
+
   end
 end
